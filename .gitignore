@@ -1,0 +1,5 @@
+/.env
+/.svelte-kit/
+/build/
+/log/
+/node_modules/

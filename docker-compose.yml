@@ -1,0 +1,11 @@
+services:
+    web:
+        build: .
+        environment:
+            COOKIE_SECRET: "${COOKIE_SECRET}"
+            DATABASE_URL: "${DATABASE_URL}"
+            PORT: "${PORT}"
+        ports:
+            - "${PORT}:${PORT}"
+        volumes:
+            - "./log:/usr/src/app/log"
