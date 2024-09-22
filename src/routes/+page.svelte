@@ -3,7 +3,7 @@
 </script>
 
 <svelte:head>
-    <title>Bun + SvelteKit Todos</title>
+    <title>Bun + SvelteKit To-dos</title>
 </svelte:head>
 <main class="flex flex-col items-center gap-4 p-4">
     <div class="flex gap-4">

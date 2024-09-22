@@ -1,10 +1,10 @@
+import { fail } from "@sveltejs/kit";
 import { eq } from "drizzle-orm";
 
 import { db } from "$lib/server/db.ts";
 import { logger } from "$lib/server/logger.ts";
 import { users } from "$lib/server/schema.ts";
 import type { LayoutServerLoad } from "./$types.ts";
-import { fail } from "@sveltejs/kit";
 
 export const load: LayoutServerLoad = async (event) => {
     if (!event.locals.userId) {

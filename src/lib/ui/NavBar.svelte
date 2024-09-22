@@ -15,7 +15,7 @@
 
 <header class="flex w-full items-center justify-between px-8 py-4">
     <a href={user ? "/todos" : "/"}>
-        <h1 class="text-3xl font-bold">Bun + SvelteKit Todos</h1>
+        <h1 class="text-3xl font-bold">Bun + SvelteKit To-dos</h1>
     </a>
     <div class="flex items-center gap-4">
         <ThemeSwitch />

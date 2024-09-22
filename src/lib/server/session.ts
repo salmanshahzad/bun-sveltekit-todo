@@ -44,6 +44,7 @@ export async function renewSession(
         event.cookies.set(COOKIE_NAME, cookieValue, {
             maxAge: SESSION_TTL,
             path: "/",
+            sameSite: "strict",
             secure: true,
         });
     }
@@ -60,6 +61,7 @@ export async function setSession(
     event.cookies.set(COOKIE_NAME, cookieValue, {
         maxAge: SESSION_TTL,
         path: "/",
+        sameSite: "strict",
         secure: true,
     });
 }

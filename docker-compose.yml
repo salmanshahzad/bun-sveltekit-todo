@@ -4,7 +4,9 @@ services:
         environment:
             COOKIE_SECRET: "${COOKIE_SECRET}"
             DATABASE_URL: "${DATABASE_URL}"
+            ORIGIN: "${ORIGIN}"
             PORT: "${PORT}"
+            REDIS_URL: "${REDIS_URL}"
         ports:
             - "${PORT}:${PORT}"
         volumes:
