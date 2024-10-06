@@ -7,7 +7,7 @@
         RiSystemDeleteBinFill,
     } from "svelte-icons-pack/ri";
 
-    import type { Todo } from "$lib/server/schema.ts";
+    import type { Todo } from "$lib/server/services/schema.ts";
     import { theme } from "$lib/stores.ts";
     import Button from "$lib/ui/Button.svelte";
     import TextInput from "$lib/ui/TextInput.svelte";
@@ -63,7 +63,7 @@
                     <TextInput
                         class="input-sm flex-grow"
                         {error}
-                        name="todo"
+                        name="name"
                         bind:value={todo.name}
                     />
                     <Button class="btn-square btn-secondary btn-sm text-xl">

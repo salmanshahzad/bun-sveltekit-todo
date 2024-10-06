@@ -1,5 +1,8 @@
 {
     "$schema": "https://json.schemastore.org/tsconfig",
+    "compilerOptions": {
+        "experimentalDecorators": true
+    },
     "extends": [
         "@tsconfig/bun",
         "@tsconfig/strictest",

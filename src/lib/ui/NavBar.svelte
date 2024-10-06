@@ -3,7 +3,7 @@
     import { Icon } from "svelte-icons-pack";
     import { RiUserFacesUserLine } from "svelte-icons-pack/ri";
 
-    import type { User } from "$lib/server/schema.ts";
+    import type { User } from "$lib/server/services/schema.ts";
     import { theme } from "$lib/stores.ts";
     import ThemeSwitch from "./ThemeSwitch.svelte";
 

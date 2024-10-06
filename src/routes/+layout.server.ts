@@ -1,27 +1,28 @@
-import { fail } from "@sveltejs/kit";
-import { eq } from "drizzle-orm";
+import { error, redirect } from "@sveltejs/kit";
+import { StatusCodes } from "http-status-codes";
 
-import { db } from "$lib/server/db.ts";
-import { logger } from "$lib/server/logger.ts";
-import { users } from "$lib/server/schema.ts";
+import { rpc } from "$lib/server/index.ts";
 import type { LayoutServerLoad } from "./$types.ts";
 
-export const load: LayoutServerLoad = async (event) => {
-    if (!event.locals.userId) {
-        return { user: undefined };
-    }
+const PUBLIC_ROUTES = ["/", "/signin", "/signup"];
 
-    try {
-        const [user] = await db
-            .select({ id: users.id, username: users.username })
-            .from(users)
-            .where(eq(users.id, event.locals.userId));
-        if (!user) {
-            return fail(500);
-        }
-        return { user };
-    } catch (err) {
-        logger.error("get user", err);
-        return fail(500);
+export const load: LayoutServerLoad = async (event) => {
+    const isVisitingPublicRoute = PUBLIC_ROUTES.includes(event.url.pathname);
+    const res = await rpc.api.user.$get(undefined, { fetch: event.fetch });
+    if (res.status === StatusCodes.INTERNAL_SERVER_ERROR) {
+        error(res.status);
     }
+    if (res.status === StatusCodes.UNAUTHORIZED) {
+        if (!isVisitingPublicRoute) {
+            const params = new URLSearchParams();
+            params.set("redirect", event.url.pathname);
+            redirect(StatusCodes.SEE_OTHER, `/signin?${params.toString()}`);
+        }
+        return undefined;
+    }
+    if (isVisitingPublicRoute) {
+        redirect(StatusCodes.SEE_OTHER, "/todos");
+    }
+    const user = await res.json();
+    return { user };
 };

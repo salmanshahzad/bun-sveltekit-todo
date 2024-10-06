@@ -31,19 +31,19 @@
         >
             <fieldset class="flex flex-col gap-4" disabled={isSubmitting}>
                 <TextInput
-                    error={form?.errors?.["username"]}
+                    error={form?.errors.username}
                     label="Username"
                     name="username"
                     type="text"
                 />
                 <TextInput
-                    error={form?.errors?.["password"]}
+                    error={form?.errors.password}
                     label="Password"
                     name="password"
                     type="password"
                 />
                 <TextInput
-                    error={form?.errors?.["confirmPassword"]}
+                    error={form?.errors?.confirmPassword}
                     label="Confirm Password"
                     name="confirmPassword"
                     type="password"

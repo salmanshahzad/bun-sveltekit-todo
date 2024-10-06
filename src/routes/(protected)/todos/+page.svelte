@@ -3,7 +3,7 @@
     import { page } from "$app/stores";
     import { afterUpdate } from "svelte";
 
-    import type { Todo } from "$lib/server/schema.ts";
+    import type { Todo } from "$lib/server/services/schema.ts";
     import TextInput from "$lib/ui/TextInput.svelte";
     import type { ActionData, PageData } from "./$types.ts";
     import TodoItem from "./TodoItem.svelte";
@@ -34,7 +34,7 @@
                 const todo = {
                     id: Math.random(),
                     userId: 0,
-                    name: formData.get("todo")?.toString() ?? "",
+                    name: formData.get("name")?.toString() ?? "",
                     completed: false,
                 };
                 todosBeingAdded = [...todosBeingAdded, todo];
@@ -48,10 +48,8 @@
             <TextInput
                 bind:this={input}
                 class="w-full"
-                error={form?.action === "add"
-                    ? form?.errors?.["todo"]
-                    : undefined}
-                name="todo"
+                error={form?.action === "add" ? form?.errors.name : undefined}
+                name="name"
                 placeholder="New Todo"
             />
         </form>
@@ -59,7 +57,7 @@
             {#each data.todos as todo (todo.id)}
                 {@const error =
                     form?.action === "edit" && form?.id === todo.id.toString()
-                        ? form?.errors?.["todo"]
+                        ? form?.errors.name
                         : undefined}
                 <TodoItem {error} {todo} />
             {/each}
